@@ -54,7 +54,7 @@ jobs:
       - name: Create test environment file
         run: |
           cd backend
-          echo '${{ secrets.test }}' > .env.test
+          echo '${{ secrets.TEST }}' > .env.test
 
       - name: Run database migrations
         run: |
