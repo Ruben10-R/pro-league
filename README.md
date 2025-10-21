@@ -1,8 +1,8 @@
-# **Project Plan: Full-Stack Hour Tracker**
+# **Project Plan: Full-Stack Tournament Management System**
 
 ## **1\. Project Overview**
 
-This project is a web-based application called **Chrono-Tracker** designed to be a comprehensive hour-tracking and project management system. It will allow users to manage projects, track time spent by various team members, and handle high-level planning. The system will be built with a decoupled architecture, where a single backend API serves data to a modern frontend, allowing for potential future integrations with other applications.
+This project is a web-based application called **Pro-League** designed to be a comprehensive tournament management system. It will allow users to create and manage tournaments, register players and teams, track matches and results, and handle bracket generation and standings. The system will be built with a decoupled architecture, where a single backend API serves data to a modern frontend, allowing for potential future integrations with other applications.
 
 ## **2\. Core Features**
 
@@ -11,27 +11,37 @@ The application will be built around the following key functionalities:
 ### **User Management**
 
 * **Authentication:** Users can sign up, log in, and securely manage their accounts.  
-* **Authorization:** Implement roles for different user types (e.g., Administrator, Manager, Team Member) to control access to various parts of the system.
+* **Authorization:** Implement roles for different user types (e.g., Administrator, Tournament Organizer, Player) to control access to various parts of the system.
 
-### **Project Management**
+### **Tournament Management**
 
-* **CRUD Operations:** Users can create, view, update, and delete projects.  
-* **Project Details:** Each project will include a name, description, assigned team members, a project lead, and a status (e.g., "Active," "On Hold," "Completed").
+* **CRUD Operations:** Users can create, view, update, and delete tournaments.  
+* **Tournament Details:** Each tournament will include a name, description, game/sport type, start and end dates, format (single elimination, double elimination, round-robin, etc.), and status (e.g., "Registration Open," "In Progress," "Completed").
+* **Tournament Settings:** Configure maximum participants, entry requirements, prizes, and rules.
 
-### **Time Tracking**
+### **Player & Team Management**
 
-* **Time Entry:** Users can log hours against specific projects. Each entry should include the date, hours spent, a description of the work, and the associated project.  
-* **Reporting:** A reporting dashboard will show total hours logged per project, per user, and within specific date ranges.
+* **Registration:** Players and teams can register for tournaments.
+* **Player Profiles:** View profiles for each player, including their tournament history, statistics, and achievements.
+* **Team Management:** Create and manage teams, invite members, and assign team roles.
 
-### **People & Team Management**
+### **Match & Bracket Management**
 
-* **Team Assignment:** Managers can assign team members to projects and track their progress.  
-* **Team Member Profiles:** View profiles for each team member, including their active projects and a summary of their logged hours.
+* **Bracket Generation:** Automatically generate tournament brackets based on the selected format and number of participants.
+* **Match Scheduling:** Schedule matches with dates, times, and locations.
+* **Score Entry:** Record match results and scores, with validation and dispute resolution features.
+* **Live Updates:** Real-time updates of match results and bracket progression.
 
-### **Planning & Dashboard**
+### **Standings & Statistics**
 
-* **Visual Calendar/Timeline:** A planning view, possibly a calendar or timeline, will provide a high-level overview of project timelines and team member assignments.  
-* **Home Dashboard:** A personalized dashboard for each user showing their current projects, tasks, and recent activity.
+* **Leaderboards:** Display current standings and rankings for ongoing tournaments.
+* **Statistics Dashboard:** View detailed statistics including win/loss records, head-to-head results, and performance metrics.
+* **Tournament History:** Archive of completed tournaments with full results and statistics.
+
+### **Dashboard & Notifications**
+
+* **Home Dashboard:** A personalized dashboard for each user showing their upcoming matches, tournaments they're participating in, and recent results.
+* **Notifications:** Real-time notifications for match schedules, results, and tournament updates.
 
 ## **3\. Technical Stack**
 
@@ -45,7 +55,7 @@ The application will use a modern, robust, and scalable technology stack.
   * A robust Node.js framework that offers a complete solution for building a backend API.  
   * It includes built-in features like a powerful ORM (**Lucid ORM**), authentication, and a clear project structure, similar to the Laravel framework you prefer.  
   * Will handle all API endpoints for the frontend.  
-* **Database:** A relational database like **Mysql** will be used for data persistence. This is a good fit for the structured relational data in this project.  
+* **Database:** A relational database like **MySQL** will be used for data persistence. This is a good fit for the structured relational data in this project, including tournaments, players, teams, matches, and results.  
 * **Containerization:** **Docker** will be used to containerize the application for consistent development and deployment environments.
 
 ## **4\. Monorepo and Deployment Strategy**
@@ -89,21 +99,23 @@ This setup allows you to run a single command (docker-compose up) to start your 
 
 ## **5\. Shared Package for Common Code**
 
-To maintain consistency and avoid code duplication between the frontend and backend services, the project will include a dedicated shared package: @chrono-tracker/shared. This package will be housed in a separate directory at the root of the monorepo.
+To maintain consistency and avoid code duplication between the frontend and backend services, the project will include a dedicated shared package: @pro-league/shared. This package will be housed in a separate directory at the root of the monorepo.
 
-The primary purpose of this package is to centralize **TypeScript interfaces, types, and enums** that are used by both the frontend and the backend. This includes data models for projects, time entries, and users. The package will be structured with dedicated subdirectories for clarity, such as /src/interfaces and /src/enums.
+The primary purpose of this package is to centralize **TypeScript interfaces, types, and enums** that are used by both the frontend and the backend. This includes data models for tournaments, matches, players, teams, and users. The package will be structured with dedicated subdirectories for clarity, such as /src/interfaces and /src/enums.
 
 The folder structure will look like this:
 
 /shared  
 ├── src  
 │   ├── interfaces  
-│   │   ├── IProject.ts  
-│   │   └── ITimeEntry.ts  
+│   │   ├── ITournament.ts  
+│   │   ├── IMatch.ts  
+│   │   ├── IPlayer.ts  
+│   │   └── ITeam.ts  
 │   └── enums  
-│       ├── StateType.ts  
-│       └── SendStateType.ts  
+│       ├── TournamentStatus.ts  
+│       └── TournamentFormat.ts  
 ├── package.json  
 └── tsconfig.json
 
-A key part of this strategy is the use of a "barrel" index.ts file within the shared package. This file will export all necessary components, allowing for clean and simple imports from other services in the monorepo, such as import { IProject } from '@chrono-tracker/shared';. This approach ensures that any change to a data model is reflected in both the frontend and backend, reducing the risk of bugs and making the development process more efficient.
+A key part of this strategy is the use of a "barrel" index.ts file within the shared package. This file will export all necessary components, allowing for clean and simple imports from other services in the monorepo, such as import { ITournament } from '@pro-league/shared';. This approach ensures that any change to a data model is reflected in both the frontend and backend, reducing the risk of bugs and making the development process more efficient.
