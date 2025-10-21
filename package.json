@@ -1,14 +1,14 @@
 {
-  "name": "chrono-tracker",
+  "name": "pro-league",
   "version": "1.0.0",
-  "description": "This project is a web-based application called **Chrono-Tracker** designed to be a comprehensive hour-tracking and project management system. It will allow users to manage projects, track time spent by various team members, and handle high-level planning. The system will be built with a decoupled architecture, where a single backend API serves data to a modern frontend, allowing for potential future integrations with other applications.",
-  "homepage": "https://github.com/RubenvanRijen/chrono-tracker#readme",
+  "description": "This project is a web-based application called **Pro-League** designed to be a comprehensive tournament management system. It will allow users to create and manage tournaments, register players and teams, track matches and results, and handle bracket generation and standings. The system will be built with a decoupled architecture, where a single backend API serves data to a modern frontend, allowing for potential future integrations with other applications.",
+  "homepage": "https://github.com/RubenvanRijen/pro-league#readme",
   "bugs": {
-    "url": "https://github.com/RubenvanRijen/chrono-tracker/issues"
+    "url": "https://github.com/RubenvanRijen/pro-league/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RubenvanRijen/chrono-tracker.git"
+    "url": "git+https://github.com/RubenvanRijen/pro-league.git"
   },
   "license": "ISC",
   "author": "RubenVanRijen",
