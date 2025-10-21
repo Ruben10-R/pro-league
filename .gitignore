@@ -1,0 +1,23 @@
+# Node modules in repo root only
+/node_modules/
+
+# Build output in repo root only
+/dist/
+/build/
+/coverage/
+
+# Root environment files
+/.env
+/.env.local
+
+# VS Code workspace folder at repo root
+/.vscode/
+
+# macOS
+/.DS_Store
+
+# Root logs
+/*.log
+
+# idea settings
+.idea

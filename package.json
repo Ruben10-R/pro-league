@@ -1,0 +1,50 @@
+{
+  "name": "chrono-tracker",
+  "version": "1.0.0",
+  "description": "This project is a web-based application called **Chrono-Tracker** designed to be a comprehensive hour-tracking and project management system. It will allow users to manage projects, track time spent by various team members, and handle high-level planning. The system will be built with a decoupled architecture, where a single backend API serves data to a modern frontend, allowing for potential future integrations with other applications.",
+  "homepage": "https://github.com/RubenvanRijen/chrono-tracker#readme",
+  "bugs": {
+    "url": "https://github.com/RubenvanRijen/chrono-tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RubenvanRijen/chrono-tracker.git"
+  },
+  "license": "ISC",
+  "author": "RubenVanRijen",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=shared",
+    "build:all": "npm run build --workspaces --if-present",
+    "dev": "npm run dev --workspaces --if-present",
+    "lint:adonis": "npm --prefix backend run lint",
+    "lint:next": "npm --prefix frontend run lint",
+    "lint:shared": "npm --prefix shared run lint",
+    "lint": "npm run lint:adonis && npm run lint:next && npm run lint:shared",
+    "lint:parallel": "concurrently \"npm --prefix backend run lint\" \"npm --prefix frontend run lint\" \"npm --prefix shared run lint\"",
+    "lint:fix:adonis": "npm --prefix backend run lint:fix",
+    "lint:fix:next": "npm --prefix frontend run lint:fix",
+    "lint:fix:shared": "npm --prefix shared run lint:fix",
+    "lint:fix": "npm run lint:fix:adonis && npm run lint:fix:next && npm run lint:fix:shared",
+    "lint:fix:parallel": "concurrently \"npm --prefix backend run lint:fix\" \"npm --prefix frontend run lint:fix\" \"npm --prefix shared run lint:fix\"",
+    "format:adonis": "npm --prefix backend run format",
+    "format:next": "npm --prefix frontend run format",
+    "format:shared": "npm --prefix shared run format",
+    "format": "npm run format:adonis && npm run format:next && npm run format:shared",
+    "format:parallel": "concurrently \"npm --prefix backend run format\" \"npm --prefix frontend run format\" \"npm --prefix shared run format\"",
+    "format:check:adonis": "npm --prefix backend run format:check",
+    "format:check:next": "npm --prefix frontend run format:check",
+    "format:check:shared": "npm --prefix shared run format:check",
+    "format:check": "npm run format:check:adonis && npm run format:check:next && npm run format:check:shared",
+    "format:check:parallel": "concurrently \"npm --prefix backend run format:check\" \"npm --prefix frontend run format:check\" \"npm --prefix shared run format:check\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

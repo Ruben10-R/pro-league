@@ -1,0 +1,78 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: test
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: chrono_tracker_test
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: chrono_user_test
+          MYSQL_PASSWORD: chrono_password_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build shared package
+        run: npm run build --workspace=shared
+
+      - name: Wait for MySQL
+        run: |
+          until mysqladmin ping -h "127.0.0.1" -P 3306 -u root -proot --silent; do
+            echo 'waiting for mysql...'
+            sleep 2
+          done
+          echo 'MySQL is ready!'
+
+      - name: Create test environment file
+        run: |
+          cd backend
+          echo '${{ secrets.test }}' > .env.test
+
+      - name: Run database migrations
+        run: |
+          cd backend
+          npm run db:migrate
+        env:
+          NODE_ENV: test
+
+      - name: Run unit tests
+        run: |
+          cd backend
+          npm run test:unit
+        env:
+          NODE_ENV: test
+
+      - name: Run functional tests
+        run: |
+          cd backend
+          npm run test:functional
+        env:
+          NODE_ENV: test
