@@ -6,7 +6,7 @@ import {
     MantineProvider,
     mantineHtmlProps,
 } from "@mantine/core";
-import {theme} from "../theme";
+import {theme} from "@frontend/theme";
 import AppShellClient from "@frontend/components/layout/AppShellClient";
 
 export const metadata: Metadata = {
