@@ -1,4 +1,4 @@
-import { MatchStatus } from '../enum'
+import { MatchStatus } from '@shared/enum'
 
 export interface IMatch {
   id: number

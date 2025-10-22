@@ -1,4 +1,4 @@
-import { ParticipantStatus } from '../enum'
+import { ParticipantStatus } from '@shared/enum'
 
 export interface ITournamentParticipant {
   id: number

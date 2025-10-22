@@ -1,5 +1,5 @@
-import {TournamentFormat} from '../enum'
-import {TournamentStatus} from '../enum'
+import {TournamentFormat} from '@shared/enum'
+import {TournamentStatus} from '@shared/enum'
 
 export interface ITournament {
     id: number
