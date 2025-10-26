@@ -23,16 +23,16 @@ export function ChronoIcon({
       <path
         d="M160 100C160 66.8629 133.137 40 100 40C66.8629 40 40 66.8629 40 100"
         stroke="#007bff"
-        stroke-width="12"
-        stroke-linecap="round"
+        strokeWidth="12"
+        strokeLinecap="round"
       />
 
       <path
         d="M100 160C133.137 160 160 133.137 160 100"
         stroke="#6610f2"
-        stroke-width="12"
-        stroke-linecap="round"
-        stroke-dasharray="20 20"
+        strokeWidth="12"
+        strokeLinecap="round"
+        strokeDasharray="20 20"
       />
 
       <circle cx="100" cy="40" r="15" fill="#007bff" />
@@ -44,9 +44,9 @@ export function ChronoIcon({
         x2="140"
         y2="60"
         stroke="#a0a0a0"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-dasharray="4 4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeDasharray="4 4"
       />
       <line
         x1="100"
@@ -54,9 +54,9 @@ export function ChronoIcon({
         x2="60"
         y2="60"
         stroke="#a0a0a0"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-dasharray="4 4"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeDasharray="4 4"
       />
     </svg>
   );

@@ -1,0 +1,74 @@
+{
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "submit": "Submit",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "back": "Back",
+    "home": "Home",
+    "profile": "Profile",
+    "save": "Save",
+    "cancel": "Cancel",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password"
+  },
+  "auth": {
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join Pro-League today",
+      "success": "Account created successfully! Redirecting...",
+      "hasAccount": "Already have an account?",
+      "failed": "Registration failed. Please try again."
+    },
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Login to your account",
+      "success": "Welcome back!",
+      "noAccount": "Don't have an account?",
+      "failed": "Login failed. Please try again."
+    },
+    "logout": {
+      "success": "You have been logged out"
+    },
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailTaken": "This email is already registered",
+      "registrationFailed": "Registration failed. Please try again.",
+      "loginFailed": "Login failed. Please try again.",
+      "logoutFailed": "Logout failed. Please try again.",
+      "unauthorized": "You must be logged in to access this page",
+      "tokenInvalid": "Your session is invalid. Please login again.",
+      "tokenExpired": "Your session has expired. Please login again."
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account settings",
+    "updateProfile": "Update Profile",
+    "changePassword": "Change Password",
+    "retrieved": "Profile loaded",
+    "updated": "Profile updated successfully!",
+    "passwordChanged": "Password changed successfully!",
+    "errors": {
+      "invalidCurrentPassword": "Current password is incorrect",
+      "updateFailed": "Failed to update profile. Please try again."
+    }
+  },
+  "validation": {
+    "required": "{field} is required",
+    "email": "Please enter a valid email address",
+    "minLength": "{field} must be at least {min} characters",
+    "maxLength": "{field} must not exceed {max} characters",
+    "failed": "Please fix the errors below"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "notFound": "The requested resource was not found.",
+    "server": "Server error. Please try again later."
+  }
+}

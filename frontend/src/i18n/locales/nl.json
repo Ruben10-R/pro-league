@@ -1,0 +1,74 @@
+{
+  "common": {
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "fullName": "Volledige Naam",
+    "submit": "Verzenden",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "logout": "Uitloggen",
+    "loading": "Laden...",
+    "back": "Terug",
+    "home": "Home",
+    "profile": "Profiel",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "currentPassword": "Huidig Wachtwoord",
+    "newPassword": "Nieuw Wachtwoord"
+  },
+  "auth": {
+    "register": {
+      "title": "Account Aanmaken",
+      "subtitle": "Word vandaag lid van Pro-League",
+      "success": "Account succesvol aangemaakt! Doorverwijzen...",
+      "hasAccount": "Heb je al een account?",
+      "failed": "Registratie mislukt. Probeer het opnieuw."
+    },
+    "login": {
+      "title": "Welkom Terug",
+      "subtitle": "Log in op je account",
+      "success": "Welkom terug!",
+      "noAccount": "Heb je nog geen account?",
+      "failed": "Inloggen mislukt. Probeer het opnieuw."
+    },
+    "logout": {
+      "success": "Je bent uitgelogd"
+    },
+    "errors": {
+      "invalidCredentials": "Ongeldig e-mailadres of wachtwoord",
+      "emailTaken": "Dit e-mailadres is al geregistreerd",
+      "registrationFailed": "Registratie mislukt. Probeer het opnieuw.",
+      "loginFailed": "Inloggen mislukt. Probeer het opnieuw.",
+      "logoutFailed": "Uitloggen mislukt. Probeer het opnieuw.",
+      "unauthorized": "Je moet ingelogd zijn om deze pagina te bekijken",
+      "tokenInvalid": "Je sessie is ongeldig. Log opnieuw in.",
+      "tokenExpired": "Je sessie is verlopen. Log opnieuw in."
+    }
+  },
+  "profile": {
+    "title": "Mijn Profiel",
+    "subtitle": "Beheer je accountinstellingen",
+    "updateProfile": "Profiel Bijwerken",
+    "changePassword": "Wachtwoord Wijzigen",
+    "retrieved": "Profiel geladen",
+    "updated": "Profiel succesvol bijgewerkt!",
+    "passwordChanged": "Wachtwoord succesvol gewijzigd!",
+    "errors": {
+      "invalidCurrentPassword": "Huidig wachtwoord is onjuist",
+      "updateFailed": "Bijwerken van profiel mislukt. Probeer het opnieuw."
+    }
+  },
+  "validation": {
+    "required": "{field} is verplicht",
+    "email": "Voer een geldig e-mailadres in",
+    "minLength": "{field} moet minimaal {min} tekens zijn",
+    "maxLength": "{field} mag niet meer dan {max} tekens bevatten",
+    "failed": "Corrigeer de onderstaande fouten"
+  },
+  "errors": {
+    "generic": "Er is iets misgegaan. Probeer het opnieuw.",
+    "network": "Netwerkfout. Controleer je verbinding.",
+    "notFound": "De gevraagde bron is niet gevonden.",
+    "server": "Serverfout. Probeer het later opnieuw."
+  }
+}
