@@ -24,12 +24,17 @@ export const plugins: Config['plugins'] = [assert(), apiClient(), pluginAdonisJS
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   setup: [
-    // Run migrations once before all tests (optimized to run only once)
+    // Run migrations once before all tests
     async () => {
       await testUtils.db().migrate()
     },
   ],
-  teardown: [],
+  teardown: [
+    // Truncate database after all tests complete
+    async () => {
+      await testUtils.db().truncate()
+    },
+  ],
 }
 
 /**

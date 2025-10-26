@@ -10,10 +10,11 @@ test.group('Auth - Me', (group) => {
   group.tap((test) => test.tags(['@auth', '@me']))
 
   test('should get current user data', async ({ client, assert }) => {
+    const uniqueEmail = `meuser-${Date.now()}@example.com`
     // Register to get user and token
     const registerResponse = await client.post('/api/auth/register').json({
       fullName: 'Test User',
-      email: 'meuser@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
@@ -26,7 +27,7 @@ test.group('Auth - Me', (group) => {
     response.assertBodyContains({ success: true })
 
     assert.properties(response.body().data, ['id', 'email', 'fullName', 'createdAt'])
-    assert.equal(response.body().data.email, 'meuser@example.com')
+    assert.equal(response.body().data.email, uniqueEmail)
     assert.equal(response.body().data.fullName, 'Test User')
     assert.notExists(response.body().data.password)
   })
@@ -44,9 +45,10 @@ test.group('Auth - Me', (group) => {
   })
 
   test('should reject request with expired/revoked token', async ({ client }) => {
+    const uniqueEmail = `revokedtoken-${Date.now()}@example.com`
     // Register to get user and token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'revokedtoken@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 

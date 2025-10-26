@@ -12,9 +12,10 @@ test.group('Auth - Register', (group) => {
   group.tap((test) => test.tags(['@auth', '@register']))
 
   test('should register a new user with valid data', async ({ client, assert }) => {
+    const uniqueEmail = `john-${Date.now()}@example.com`
     const response = await client.post('/api/auth/register').json({
       fullName: 'John Doe',
-      email: 'john@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
@@ -28,15 +29,16 @@ test.group('Auth - Register', (group) => {
 
     assert.properties(response.body().data, ['user', 'token'])
     assert.properties(response.body().data.user, ['id', 'email', 'fullName', 'createdAt'])
-    assert.equal(response.body().data.user.email, 'john@example.com')
+    assert.equal(response.body().data.user.email, uniqueEmail)
     assert.equal(response.body().data.user.fullName, 'John Doe')
     assert.properties(response.body().data.token, ['type', 'token'])
     assert.equal(response.body().data.token.type, 'bearer')
   })
 
   test('should register a user without fullName', async ({ client, assert }) => {
+    const uniqueEmail = `janewithoutname-${Date.now()}@example.com`
     const response = await client.post('/api/auth/register').json({
-      email: 'janewithoutname@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
@@ -45,15 +47,16 @@ test.group('Auth - Register', (group) => {
   })
 
   test('should reject registration with duplicate email', async ({ client }) => {
+    const uniqueEmail = `duplicate-${Date.now()}@example.com`
     // First registration
     await client.post('/api/auth/register').json({
-      email: 'duplicate@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
     // Second registration with same email
     const response = await client.post('/api/auth/register').json({
-      email: 'duplicate@example.com',
+      email: uniqueEmail,
       password: 'password456',
     })
 
@@ -76,8 +79,9 @@ test.group('Auth - Register', (group) => {
   })
 
   test('should reject registration with short password', async ({ client }) => {
+    const uniqueEmail = `shortpass-${Date.now()}@example.com`
     const response = await client.post('/api/auth/register').json({
-      email: 'shortpass@example.com',
+      email: uniqueEmail,
       password: 'short',
     })
 
@@ -93,27 +97,30 @@ test.group('Auth - Register', (group) => {
   })
 
   test('should reject registration with missing password', async ({ client }) => {
+    const uniqueEmail = `nopassword-${Date.now()}@example.com`
     const response = await client.post('/api/auth/register').json({
-      email: 'nopassword@example.com',
+      email: uniqueEmail,
     })
 
     response.assertStatus(422)
   })
 
   test('should normalize email to lowercase', async ({ client, assert }) => {
+    const uniqueEmail = `UPPERCASE-${Date.now()}@EXAMPLE.COM`
     const response = await client.post('/api/auth/register').json({
-      email: 'UPPERCASE@EXAMPLE.COM',
+      email: uniqueEmail,
       password: 'password123',
     })
 
     response.assertStatus(201)
-    assert.equal(response.body().data.user.email, 'uppercase@example.com')
+    assert.equal(response.body().data.user.email, uniqueEmail.toLowerCase())
   })
 
   test('should hash password before storing', async ({ client, assert }) => {
     const password = 'password123'
+    const uniqueEmail = `hashedpass-${Date.now()}@example.com`
     const response = await client.post('/api/auth/register').json({
-      email: 'hashedpass@example.com',
+      email: uniqueEmail,
       password,
     })
 

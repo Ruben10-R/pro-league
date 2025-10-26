@@ -11,9 +11,10 @@ test.group('Auth - Logout', (group) => {
   group.tap((test) => test.tags(['@auth', '@logout']))
 
   test('should logout authenticated user', async ({ client }) => {
+    const uniqueEmail = `logoutuser-${Date.now()}@example.com`
     // Register to get user and token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'logoutuser@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
@@ -44,9 +45,10 @@ test.group('Auth - Logout', (group) => {
   })
 
   test('should invalidate token after logout', async ({ client }) => {
+    const uniqueEmail = `invalidatetoken-${Date.now()}@example.com`
     // Register to get user and token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'invalidatetoken@example.com',
+      email: uniqueEmail,
       password: 'password123',
     })
 
