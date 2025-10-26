@@ -17,8 +17,8 @@ jobs:
         env:
           MYSQL_DATABASE: pro_league_test
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_USER: pro_league_user_test
-          MYSQL_PASSWORD: pro_league_password_test
+          MYSQL_USER: pro_league_user
+          MYSQL_PASSWORD: pro_league_password
         ports:
           - 3306:3306
         options: >-
@@ -51,28 +51,17 @@ jobs:
           done
           echo 'MySQL is ready!'
 
-      - name: Create test environment file
+      - name: Create .env.test file
         run: |
           cd backend
-          echo '${{ secrets.TEST }}' > .env.test
-
-      - name: Run database migrations
-        run: |
-          cd backend
-          npm run db:migrate
-        env:
-          NODE_ENV: test
+          echo "${{ secrets.TEST }}" > .env.test
 
       - name: Run unit tests
         run: |
           cd backend
           npm run test:unit
-        env:
-          NODE_ENV: test
 
       - name: Run functional tests
         run: |
           cd backend
           npm run test:functional
-        env:
-          NODE_ENV: test
