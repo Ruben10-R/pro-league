@@ -202,7 +202,38 @@ npm run lint
 - [AI Agent Guidelines](ai.md) - How to work with AI agents on this project
 - [CI/CD Setup](.github/TEST_SECRET_SETUP.md) - GitHub Actions configuration
 - [Coding Guidelines](.ai/coding-guidelines.md) - Code standards and best practices
+- [Test Database Setup](docs/TEST_DATABASE.md) - How the test database is configured
 
-## **9. Contributing**
+## **9. Database Access**
+
+The project uses MySQL with two databases on the same server:
+
+**Development Database:**
+- Host: localhost
+- Port: 3306
+- Database: pro_league
+- User: pro_league_user
+- Password: pro_league_password
+
+**Test Database:**
+- Host: localhost
+- Port: 3306
+- Database: pro_league_test
+- User: pro_league_user
+- Password: pro_league_password
+
+Both databases are automatically created when you start the application. See [Test Database Setup](docs/TEST_DATABASE.md) for details on how testing works.
+
+### Connecting with DBeaver
+
+1. Create a new MySQL connection
+2. Enter the connection details above
+3. Click "Test Connection" - if you get "Public Key Retrieval is not allowed":
+   - Go to "Driver properties" tab
+   - Add property: `allowPublicKeyRetrieval` = `true`
+4. Click "Finish"
+
+## **10. Contributing**
 
 When working on this project, please follow the agent-based workflow defined in [ai.md](ai.md). Use the appropriate specialized agents for backend, frontend, or review tasks.
+
