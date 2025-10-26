@@ -10,14 +10,14 @@ The GitHub Actions workflow has been simplified to use a single `TEST` secret th
 ## Setup Instructions
 
 ### Step 1: Copy the Test Environment Configuration
-The content for the TEST secret is available in `.github/TEST_SECRET_TEMPLATE.txt`
+The content for the TEST secret is available in `backend/.env.test.example`
 
 ### Step 2: Add the Secret to GitHub
 1. Go to your repository on GitHub
 2. Navigate to **Settings** > **Secrets and variables** > **Actions**
 3. Click **New repository secret**
 4. Name: `TEST`
-5. Value: Copy the entire content from `.github/TEST_SECRET_TEMPLATE.txt`
+5. Value: Copy the entire content from `/backend/.env.test.example`
 6. Click **Add secret**
 
 ### Step 3: Verify the Configuration
