@@ -77,8 +77,16 @@ export default class MatchesController {
 
     const match = await Match.create(data)
 
-    await match.load('participant1')
-    await match.load('participant2')
+    if (match.participant1Id) {
+      await match.load('participant1', (query) => {
+        query.preload('user').preload('team')
+      })
+    }
+    if (match.participant2Id) {
+      await match.load('participant2', (query) => {
+        query.preload('user').preload('team')
+      })
+    }
 
     return response.created(match)
   }
@@ -111,9 +119,21 @@ export default class MatchesController {
     match.merge(data)
     await match.save()
 
-    await match.load('participant1')
-    await match.load('participant2')
-    await match.load('winner')
+    if (match.participant1Id) {
+      await match.load('participant1', (query) => {
+        query.preload('user').preload('team')
+      })
+    }
+    if (match.participant2Id) {
+      await match.load('participant2', (query) => {
+        query.preload('user').preload('team')
+      })
+    }
+    if (match.winnerId) {
+      await match.load('winner', (query) => {
+        query.preload('user').preload('team')
+      })
+    }
 
     return response.ok(match)
   }

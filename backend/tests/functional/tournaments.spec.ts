@@ -10,9 +10,7 @@ test.group('Tournaments', (group) => {
 
   group.each.setup(async () => {
     await testUtils.db().truncate()
-  })
 
-  group.setup(async () => {
     // Create a test user and get auth token
     user = await User.create({
       fullName: 'Test User',

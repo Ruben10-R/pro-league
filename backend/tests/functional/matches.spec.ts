@@ -15,9 +15,7 @@ test.group('Matches', (group) => {
 
   group.each.setup(async () => {
     await testUtils.db().truncate()
-  })
 
-  group.setup(async () => {
     user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
