@@ -3,8 +3,15 @@ import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Me', (group) => {
   group.each.setup(async () => {
+    await testUtils.db().seed()
+  })
+
+  group.each.teardown(async () => {
     await testUtils.db().truncate()
   })
+
+  // Tag tests for filtering
+  group.tap((test) => test.tags(['@auth', '@me']))
 
   test('should get current user data', async ({ client, assert }) => {
     // Register a user

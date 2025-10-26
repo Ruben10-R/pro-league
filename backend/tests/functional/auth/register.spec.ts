@@ -3,10 +3,18 @@ import { ErrorMessageKeys, SuccessMessageKeys } from '@pro-league/shared'
 import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Register', (group) => {
-  // Clean up database after each test
+  // Reset database before each test
   group.each.setup(async () => {
+    await testUtils.db().seed()
+  })
+
+  // Teardown after each test
+  group.each.teardown(async () => {
     await testUtils.db().truncate()
   })
+
+  // Tag tests for filtering
+  group.tap((test) => test.tags(['@auth', '@register']))
 
   test('should register a new user with valid data', async ({ client, assert }) => {
     const response = await client.post('/api/auth/register').json({
