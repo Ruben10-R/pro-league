@@ -58,13 +58,13 @@ test.group('Auth - Login', (group) => {
   test('should reject login with invalid password', async ({ client }) => {
     // Register a user
     await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'wrongpassword@example.com',
       password: 'password123',
     })
 
     // Try to login with wrong password
     const response = await client.post('/api/auth/login').json({
-      email: 'test@example.com',
+      email: 'wrongpassword@example.com',
       password: 'wrongpassword',
     })
 
@@ -87,7 +87,7 @@ test.group('Auth - Login', (group) => {
 
   test('should reject login with missing password', async ({ client }) => {
     const response = await client.post('/api/auth/login').json({
-      email: 'test@example.com',
+      email: 'missingpassword@example.com',
     })
 
     response.assertStatus(422)
@@ -96,36 +96,36 @@ test.group('Auth - Login', (group) => {
   test('should handle email case insensitively', async ({ client, assert }) => {
     // Register with lowercase
     await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'casetest@example.com',
       password: 'password123',
     })
 
     // Login with uppercase
     const response = await client.post('/api/auth/login').json({
-      email: 'TEST@EXAMPLE.COM',
+      email: 'CASETEST@EXAMPLE.COM',
       password: 'password123',
     })
 
     response.assertStatus(200)
-    assert.equal(response.body().data.user.email, 'test@example.com')
+    assert.equal(response.body().data.user.email, 'casetest@example.com')
   })
 
   test('should generate different tokens for multiple logins', async ({ client, assert }) => {
     // Register a user
     await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'multitoken@example.com',
       password: 'password123',
     })
 
     // First login
     const response1 = await client.post('/api/auth/login').json({
-      email: 'test@example.com',
+      email: 'multitoken@example.com',
       password: 'password123',
     })
 
     // Second login
     const response2 = await client.post('/api/auth/login').json({
-      email: 'test@example.com',
+      email: 'multitoken@example.com',
       password: 'password123',
     })
 

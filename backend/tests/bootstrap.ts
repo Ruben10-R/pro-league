@@ -23,7 +23,12 @@ export const plugins: Config['plugins'] = [assert(), apiClient(), pluginAdonisJS
  * The teardown functions are executed after all the tests
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [],
+  setup: [
+    // Run migrations once before all tests (optimized to run only once)
+    async () => {
+      await testUtils.db().migrate()
+    },
+  ],
   teardown: [],
 }
 
@@ -33,9 +38,7 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
  */
 export const configureSuite: Config['configureSuite'] = (suite) => {
   if (['browser', 'functional', 'e2e', 'unit'].includes(suite.name)) {
-    return suite
-      .setup(() => testUtils.httpServer().start())
-      .setup(() => testUtils.db().migrate())
+    return suite.setup(() => testUtils.httpServer().start())
   }
 }
 
