@@ -69,7 +69,7 @@ test.group('Auth - Register', (group) => {
       password: 'password123',
     })
 
-    response.assertStatus(400)
+    response.assertStatus(422)
   })
 
   test('should reject registration with short password', async ({ client }) => {
@@ -78,7 +78,7 @@ test.group('Auth - Register', (group) => {
       password: 'short',
     })
 
-    response.assertStatus(400)
+    response.assertStatus(422)
   })
 
   test('should reject registration with missing email', async ({ client }) => {
@@ -86,7 +86,7 @@ test.group('Auth - Register', (group) => {
       password: 'password123',
     })
 
-    response.assertStatus(400)
+    response.assertStatus(422)
   })
 
   test('should reject registration with missing password', async ({ client }) => {
@@ -94,7 +94,7 @@ test.group('Auth - Register', (group) => {
       email: 'nopassword@example.com',
     })
 
-    response.assertStatus(400)
+    response.assertStatus(422)
   })
 
   test('should normalize email to lowercase', async ({ client, assert }) => {
