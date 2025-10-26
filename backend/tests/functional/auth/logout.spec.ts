@@ -4,10 +4,6 @@ import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Logout', (group) => {
   group.each.setup(async () => {
-    await testUtils.db().seed()
-  })
-
-  group.each.teardown(async () => {
     await testUtils.db().truncate()
   })
 
@@ -15,13 +11,18 @@ test.group('Auth - Logout', (group) => {
   group.tap((test) => test.tags(['@auth', '@logout']))
 
   test('should logout authenticated user', async ({ client }) => {
-    // Register and get token
-    const registerResponse = await client.post('/api/auth/register').json({
+    // Register and login to get token
+    await client.post('/api/auth/register').json({
       email: 'logoutuser@example.com',
       password: 'password123',
     })
 
-    const token = registerResponse.body().data.token.token
+    const loginResponse = await client.post('/api/auth/login').json({
+      email: 'logoutuser@example.com',
+      password: 'password123',
+    })
+
+    const token = loginResponse.body().data.token.token
 
     // Logout
     const response = await client.post('/api/auth/logout').bearerToken(token)
@@ -48,13 +49,18 @@ test.group('Auth - Logout', (group) => {
   })
 
   test('should invalidate token after logout', async ({ client }) => {
-    // Register and get token
-    const registerResponse = await client.post('/api/auth/register').json({
+    // Register and login to get token
+    await client.post('/api/auth/register').json({
       email: 'invalidatetoken@example.com',
       password: 'password123',
     })
 
-    const token = registerResponse.body().data.token.token
+    const loginResponse = await client.post('/api/auth/login').json({
+      email: 'invalidatetoken@example.com',
+      password: 'password123',
+    })
+
+    const token = loginResponse.body().data.token.token
 
     // Logout
     await client.post('/api/auth/logout').bearerToken(token)

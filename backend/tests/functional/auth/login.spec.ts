@@ -5,11 +5,6 @@ import testUtils from '@adonisjs/core/services/test_utils'
 test.group('Auth - Login', (group) => {
   // Reset database before each test
   group.each.setup(async () => {
-    await testUtils.db().seed()
-  })
-
-  // Teardown after each test
-  group.each.teardown(async () => {
     await testUtils.db().truncate()
   })
 
