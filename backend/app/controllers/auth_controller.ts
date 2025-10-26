@@ -10,57 +10,47 @@ export default class AuthController {
    * POST /api/auth/register
    */
   async register({ request, response }: HttpContext) {
-    try {
-      // Validate request data
-      const data = await request.validateUsing(registerValidator)
+    // Validate request data (validation errors will be automatically handled as 422)
+    const data = await request.validateUsing(registerValidator)
 
-      // Check if email already exists
-      const existingUser = await User.findBy('email', data.email)
-      if (existingUser) {
-        return response.conflict({
-          success: false,
-          message: {
-            key: ErrorMessageKeys.AUTH_EMAIL_TAKEN,
-            params: { email: data.email },
-          },
-        })
-      }
-
-      // Create user
-      const user = await User.create(data)
-
-      // Generate access token
-      const token = await User.accessTokens.create(user)
-
-      return response.created({
-        success: true,
-        message: {
-          key: SuccessMessageKeys.AUTH_REGISTER_SUCCESS,
-          params: {},
-        },
-        data: {
-          user: {
-            id: user.id,
-            fullName: user.fullName,
-            email: user.email,
-            createdAt: user.createdAt.toISO(),
-            updatedAt: user.updatedAt?.toISO() || null,
-          },
-          token: {
-            type: 'bearer' as const,
-            token: token.value!.release(),
-          },
-        },
-      })
-    } catch (error) {
-      return response.badRequest({
+    // Check if email already exists
+    const existingUser = await User.findBy('email', data.email)
+    if (existingUser) {
+      return response.conflict({
         success: false,
         message: {
-          key: ErrorMessageKeys.AUTH_REGISTRATION_FAILED,
-          params: {},
+          key: ErrorMessageKeys.AUTH_EMAIL_TAKEN,
+          params: { email: data.email },
         },
       })
     }
+
+    // Create user
+    const user = await User.create(data)
+
+    // Generate access token
+    const token = await User.accessTokens.create(user)
+
+    return response.created({
+      success: true,
+      message: {
+        key: SuccessMessageKeys.AUTH_REGISTER_SUCCESS,
+        params: {},
+      },
+      data: {
+        user: {
+          id: user.id,
+          fullName: user.fullName,
+          email: user.email,
+          createdAt: user.createdAt.toISO(),
+          updatedAt: user.updatedAt?.toISO() || null,
+        },
+        token: {
+          type: 'bearer' as const,
+          token: token.value!.release(),
+        },
+      },
+    })
   }
 
   /**
@@ -68,10 +58,10 @@ export default class AuthController {
    * POST /api/auth/login
    */
   async login({ request, response }: HttpContext) {
-    try {
-      // Validate request data
-      const { email, password } = await request.validateUsing(loginValidator)
+    // Validate request data (validation errors will be automatically handled as 422)
+    const { email, password } = await request.validateUsing(loginValidator)
 
+    try {
       // Verify credentials
       const user = await User.verifyCredentials(email, password)
 
