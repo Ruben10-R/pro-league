@@ -123,3 +123,86 @@ The folder structure will look like this:
 ```
 
 A key part of this strategy is the use of a "barrel" index.ts file within the shared package. This file will export all necessary components, allowing for clean and simple imports from other services in the monorepo, such as `import { ITournament } from '@pro-league/shared';`. This approach ensures that any change to a data model is reflected in both the frontend and backend, reducing the risk of bugs and making the development process more efficient.
+
+## **6. Getting Started**
+
+For detailed setup instructions, see [docs/QUICKSTART.md](docs/QUICKSTART.md).
+
+### Quick Start
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd pro-league
+
+# Install dependencies
+npm ci
+
+# Start all services with Docker
+docker-compose up
+
+# The application will be available at:
+# - Frontend: http://localhost:3000
+# - Backend API: http://localhost:3333
+# - Database: localhost:3306
+```
+
+### Development
+
+```bash
+# Start backend in dev mode
+npm run dev:backend
+
+# Start frontend in dev mode
+npm run dev:frontend
+
+# Run tests
+npm run test:backend
+npm run lint
+```
+
+## **7. Current Implementation Status**
+
+### ✅ Completed Features
+
+#### Authentication System
+- User registration with email and password
+- User login with JWT tokens
+- Session management (logout)
+- Password hashing with bcrypt
+- User profile endpoints
+
+#### Internationalization (i18n)
+- Multi-language support (English and Dutch)
+- Backend returns localized error/success messages
+- Frontend uses next-intl for translations
+- Locale-based routing (/en/*, /nl/*)
+
+#### User Profile
+- View user profile
+- Update full name
+- Change password with validation
+
+#### Infrastructure
+- Docker containerization for all services
+- MySQL database with migrations
+- Comprehensive test suite (unit + functional)
+- CI/CD pipeline with GitHub Actions
+- ESLint and Prettier for code quality
+
+### 🚧 In Progress
+
+- Tournament management features
+- Team management features
+- Match and bracket system
+
+## **8. Documentation**
+
+- [Quickstart Guide](docs/QUICKSTART.md) - Setup and running the application
+- [AI Agent Guidelines](ai.md) - How to work with AI agents on this project
+- [CI/CD Setup](.github/TEST_SECRET_SETUP.md) - GitHub Actions configuration
+- [Coding Guidelines](.ai/coding-guidelines.md) - Code standards and best practices
+
+## **9. Contributing**
+
+When working on this project, please follow the agent-based workflow defined in [ai.md](ai.md). Use the appropriate specialized agents for backend, frontend, or review tasks.
