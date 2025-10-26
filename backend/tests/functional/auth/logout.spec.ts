@@ -10,7 +10,7 @@ test.group('Auth - Logout', (group) => {
   test('should logout authenticated user', async ({ client }) => {
     // Register and get token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'logoutuser@example.com',
       password: 'password123',
     })
 
@@ -43,7 +43,7 @@ test.group('Auth - Logout', (group) => {
   test('should invalidate token after logout', async ({ client }) => {
     // Register and get token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'invalidatetoken@example.com',
       password: 'password123',
     })
 

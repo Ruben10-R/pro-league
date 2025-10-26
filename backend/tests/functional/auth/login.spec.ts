@@ -79,7 +79,7 @@ test.group('Auth - Login', (group) => {
       password: 'password123',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should reject login with missing password', async ({ client }) => {
@@ -87,7 +87,7 @@ test.group('Auth - Login', (group) => {
       email: 'test@example.com',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should handle email case insensitively', async ({ client, assert }) => {

@@ -10,7 +10,7 @@ test.group('Auth - Me', (group) => {
     // Register a user
     const registerResponse = await client.post('/api/auth/register').json({
       fullName: 'Test User',
-      email: 'test@example.com',
+      email: 'meuser@example.com',
       password: 'password123',
     })
 
@@ -23,7 +23,7 @@ test.group('Auth - Me', (group) => {
     response.assertBodyContains({ success: true })
 
     assert.properties(response.body().data, ['id', 'email', 'fullName', 'createdAt'])
-    assert.equal(response.body().data.email, 'test@example.com')
+    assert.equal(response.body().data.email, 'meuser@example.com')
     assert.equal(response.body().data.fullName, 'Test User')
     assert.notExists(response.body().data.password)
   })
@@ -43,7 +43,7 @@ test.group('Auth - Me', (group) => {
   test('should reject request with expired/revoked token', async ({ client }) => {
     // Register and get token
     const registerResponse = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'revokedtoken@example.com',
       password: 'password123',
     })
 

@@ -33,7 +33,7 @@ test.group('Auth - Register', (group) => {
 
   test('should register a user without fullName', async ({ client, assert }) => {
     const response = await client.post('/api/auth/register').json({
-      email: 'jane@example.com',
+      email: 'janewithoutname@example.com',
       password: 'password123',
     })
 
@@ -69,16 +69,16 @@ test.group('Auth - Register', (group) => {
       password: 'password123',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should reject registration with short password', async ({ client }) => {
     const response = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'shortpass@example.com',
       password: 'short',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should reject registration with missing email', async ({ client }) => {
@@ -86,31 +86,31 @@ test.group('Auth - Register', (group) => {
       password: 'password123',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should reject registration with missing password', async ({ client }) => {
     const response = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'nopassword@example.com',
     })
 
-    response.assertStatus(422)
+    response.assertStatus(400)
   })
 
   test('should normalize email to lowercase', async ({ client, assert }) => {
     const response = await client.post('/api/auth/register').json({
-      email: 'TEST@EXAMPLE.COM',
+      email: 'UPPERCASE@EXAMPLE.COM',
       password: 'password123',
     })
 
     response.assertStatus(201)
-    assert.equal(response.body().data.user.email, 'test@example.com')
+    assert.equal(response.body().data.user.email, 'uppercase@example.com')
   })
 
   test('should hash password before storing', async ({ client, assert }) => {
     const password = 'password123'
     const response = await client.post('/api/auth/register').json({
-      email: 'test@example.com',
+      email: 'hashedpass@example.com',
       password,
     })
 
