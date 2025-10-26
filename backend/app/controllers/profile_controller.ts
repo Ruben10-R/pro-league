@@ -12,7 +12,7 @@ export default class ProfileController {
    * GET /api/profile
    */
   async show({ auth, response }: HttpContext): Promise<IApiResponse<IUser>> {
-    const user = auth.user!
+    const user: User = auth.user!
 
     return response.ok({
       success: true,
@@ -29,7 +29,7 @@ export default class ProfileController {
    * PUT /api/profile
    */
   async update({ auth, request, response }: HttpContext): Promise<IApiResponse<IUser>> {
-    const user = auth.user!
+    const user: User = auth.user!
     const payload = await request.validateUsing(updateProfileValidator)
 
     // Update user
@@ -54,7 +54,7 @@ export default class ProfileController {
    * PUT /api/profile/password
    */
   async changePassword({ auth, request, response }: HttpContext): Promise<IApiResponse<null>> {
-    const user = auth.user!
+    const user: User = auth.user!
     const payload = await request.validateUsing(changePasswordValidator)
 
     // Verify current password

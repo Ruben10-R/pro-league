@@ -1,10 +1,11 @@
 import { test } from '@japa/runner'
 import { ErrorMessageKeys, SuccessMessageKeys } from '@pro-league/shared'
+import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Login', (group) => {
   // Clean up database before each test
-  group.each.setup(async ({ context }) => {
-    await context.db.truncate()
+  group.each.setup(async () => {
+    await testUtils.db().truncate()
   })
 
   test('should login with valid credentials', async ({ client, assert }) => {

@@ -1,9 +1,10 @@
 import { test } from '@japa/runner'
 import { SuccessMessageKeys, ErrorMessageKeys } from '@pro-league/shared'
+import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Logout', (group) => {
-  group.each.setup(async ({ context }) => {
-    await context.db.truncate()
+  group.each.setup(async () => {
+    await testUtils.db().truncate()
   })
 
   test('should logout authenticated user', async ({ client }) => {

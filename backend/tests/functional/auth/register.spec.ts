@@ -1,10 +1,11 @@
 import { test } from '@japa/runner'
 import { ErrorMessageKeys, SuccessMessageKeys } from '@pro-league/shared'
+import testUtils from '@adonisjs/core/services/test_utils'
 
 test.group('Auth - Register', (group) => {
   // Clean up database after each test
-  group.each.setup(async ({ context }) => {
-    await context.db.truncate()
+  group.each.setup(async () => {
+    await testUtils.db().truncate()
   })
 
   test('should register a new user with valid data', async ({ client, assert }) => {
